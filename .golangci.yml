@@ -1,0 +1,55 @@
+linters-settings:
+  varnamelen:
+    min-name-length: 2
+    max-distance: 20
+  nlreturn:
+    # Size of the block (including return statement that is still "OK")
+    # so no return split required.
+    # Default: 1
+    block-size: 2
+  # errcheck:
+  #   check-type-assertions: true
+  # goconst:
+  #   min-len: 2
+  #   min-occurrences: 3
+  # gocritic:
+  #   enabled-tags:
+  #     - diagnostic
+  #     - experimental
+  #     - opinionated
+  #     - performance
+  #     - style
+  # govet:
+  #   check-shadowing: true
+  #   enable:
+  #     - fieldalignment
+
+  wsl:
+    force-err-cuddling: true
+  nolintlint:
+    require-explanation: true
+    require-specific: true
+
+linters:
+  enable-all: true
+  disable:
+    - goimports 
+    - ireturn
+    - musttag
+    - exhaustruct
+    - gomnd
+    - varnamelen
+    - gochecknoglobals
+    - paralleltest
+    - godox
+    - gci
+    - gofumpt
+    - execinquery
+    - copyloopvar
+    - intrange
+    - depguard
+    - tagalign
+
+run:
+  issues-exit-code: 1
+ 

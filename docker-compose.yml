@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  server:
+    environment:
+        SERVER_ADDRESS: "server:8080"
+        CONN_POW_DIFFICULTY: "3"
+        CONN_KEEP_ALIVE: "60s"
+        CONN_WRITE_TIMEOUT: "5s"
+        CONN_READ_TIMEOUT: "15s"
+        CONN_IDLE_TIMEOUT: "30s"
+        LOGGER_LVL: "info"
+        DICT_PATH: "data/word_of_wisdom.txt"
+    build:
+      context: .
+      dockerfile: deployments/server/Dockerfile
+    restart: 'no'
+    networks:
+      - pow-ddos
+
+  client:
+    environment:
+      CLIENT_ADDRESS: "server:8080"
+      REQUEST_COUNT: "3"
+      CONN_KEEP_ALIVE: "60s"
+      CONN_WRITE_TIMEOUT: "5s"
+      CONN_READ_TIMEOUT: "5s"
+      CONN_IDLE_TIMEOUT: "30s"
+      LOGGER_LVL: "info"
+    build: 
+      context: .
+      dockerfile: deployments/client/Dockerfile
+    restart: 'no'
+    entrypoint:
+      - /word-of-wisdom-cli
+    depends_on:
+      - server
+    networks:
+      - pow-ddos
+networks:
+  pow-ddos:
+    driver: bridge

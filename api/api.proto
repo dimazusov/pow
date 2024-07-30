@@ -1,0 +1,21 @@
+syntax="proto3";
+
+package scheme;
+option go_package = "pb/scheme";
+
+message InitRequest {
+  int32 ProtocolVersion = 1;
+}
+
+message InitResponse {  
+  bytes Challenge = 1;    
+  int32 Difficulty = 2;
+}
+
+message ChallengeRequest { 
+  uint64 Nonce = 1;
+}
+
+message ChallengeResponse {
+  string Quote = 1;
+} 
